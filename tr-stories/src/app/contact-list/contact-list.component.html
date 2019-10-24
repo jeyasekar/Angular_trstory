@@ -1,0 +1,76 @@
+<h1>Drop Down</h1>
+<div>
+    <table><tr>
+  <td>
+            <b>Select Project :&nbsp;&nbsp;&nbsp; </b><select class="btn btn-primary dropdown-toggle" [(ngModel)]="projectId" (change)="project()">
+    
+  
+                    <option *ngFor="let item of projects"  [disabled]="item.id==0" [ngValue]="item" >{{item.name}}</option>
+                    
+                  </select>
+                </td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>
+                        <div *ngIf="edited">
+                                <!-- <div> -->
+                                        <b> Select Sprint :&nbsp;&nbsp;&nbsp;</b> <select class="btn btn-primary dropdown-toggle" [(ngModel)]="sprintId" (change)="sprint()">
+                              <option *ngFor="let sprint of sprints" [disabled]="sprint.id==0" [ngValue]="sprint">{{sprint.name}}</option>
+                            </select>
+                            <!-- {{sprintId | json}} -->
+                             </div> 
+                </td>
+    </tr>
+
+</table>
+  
+<!-- {{projectId | json}} -->
+<!-- </div> -->
+<!-- <br/> -->
+
+</div>
+
+
+
+
+
+<div *ngIf="tableVisible" class="table table-striped" style="margin-top: 70px;">
+    <table mdbTable class="z-depth-1" >
+      <thead>
+            <tr>
+                    <th>#</th>
+                    <th [mdbTableSort]="stories" sortBy="id">StoryNo
+                      <mdb-icon fas icon="sort"></mdb-icon>
+                    </th>
+                    <th>StoryName</th> 
+                    <th>Description</th>
+                    <th>Email</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let story of stories; let i = index">
+                    <td>{{i + 1}}</td>
+                    <td>
+                            <button class="btn btn-primary" (click)="selectContact(story)"> {{story.id}}</button>
+                        </td>
+                    <td>{{story.name}}</td>
+                    <td>{{story.description}}</td> 
+                    <td>{{story.email}}</td> 
+                    
+                </tr>
+            </tbody>
+ 
+    </table>
+    <div class="card text-center" *ngIf="selectedContact">
+        <div class="card-header">
+          # {{selectedContact.id}}
+        </div>
+        <div class="card-block">
+          <h4 class="card-title">{{selectedContact.name}}</h4>
+          <p class="card-text">
+            {{selectedContact.description}}
+          </p>    
+        </div>
+  
+      </div>
+  </div>
